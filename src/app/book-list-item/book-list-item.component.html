@@ -1,0 +1,22 @@
+@if (book) { @if (book.thumbnails && book.thumbnails[0] &&
+book.thumbnails[0].url) {
+<img [src]="book.thumbnails[0].url" alt="" class="ui tiny image" />
+}
+
+<div class="content">
+  <div class="header">{{ book.title }}</div>
+  @if (book.subtitle) {
+  <div class="description">{{ book.subtitle }}</div>
+  }
+  <div class="metadata">
+    @for (author of book.authors; track author) {
+    <span>
+      {{ author }}
+    </span>
+    }
+    <br />
+    ISBN {{ book.isbn }}
+  </div>
+</div>
+
+}
