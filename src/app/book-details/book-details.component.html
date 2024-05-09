@@ -1,0 +1,46 @@
+@if (book) {
+<div>
+  <h1>{{ book.title }}</h1>
+  @if (book.subtitle) {
+  <h3>{{ book.subtitle }}</h3>
+  }
+  <div class="ui divider"></div>
+  <div class="ui grid">
+    <div class="four wide column">
+      <h4>Autoren</h4>
+      @for (author of book.authors; track author) {
+      {{ author }}<br />
+      }
+    </div>
+    <div class="four wide column">
+      <h4>ISBN</h4>
+      {{ book.isbn }}
+    </div>
+    <div class="four wide column">
+      <h4>Erschienen</h4>
+      {{ book.published }}
+    </div>
+    <!-- ⚠️ Unterschied zum Buch:
+    div mit ngIf nur anzeigen, wenn book.rating definiert ist.
+    Das ist notwendig, weil das Rating optional ist. -->
+    @if (book.rating) {
+    <div class="four wide column">
+      <h4>Rating</h4>
+      @for ( r of getRating(book.rating); track r) {
+      <i class="yellow star icon"></i>
+      }
+    </div>
+    }
+  </div>
+  <h4>Beschreibung</h4>
+  <p>{{ book.description }}</p>
+  <div class="ui small images">
+    @for (thumbnail of book.thumbnails; track thumbnail) {
+    <img [src]="thumbnail.url" alt="" />
+    }
+  </div>
+  <button class="ui red button" (click)="showBookList()">
+    Zurück zur Buchliste
+  </button>
+</div>
+}
