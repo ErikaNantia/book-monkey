@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookListItemComponent } from '../book-list-item/book-list-item.component';
 
@@ -11,6 +11,7 @@ import { BookListItemComponent } from '../book-list-item/book-list-item.componen
 })
 export class BookListComponent implements OnInit {
   public books: Book[] = [];
+  @Output() showDetailsEvent = new EventEmitter<Book>();
 
   public ngOnInit(): void {
     this.books = [
@@ -42,6 +43,10 @@ export class BookListComponent implements OnInit {
       }
     ]
 
+  }
+
+  public showDetails(book: Book): void {
+    this.showDetailsEvent.emit(book);
   }
 
 }

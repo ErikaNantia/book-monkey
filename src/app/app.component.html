@@ -1,1 +1,5 @@
-<bm-book-list></bm-book-list>
+@if (viewState === 'list') {
+<bm-book-list (showDetailsEvent)="showDetails($event)"></bm-book-list>
+} @if (viewState === 'details') {
+<bm-book-details (showListEvent)="showList()" [book]="book"></bm-book-details>
+}
